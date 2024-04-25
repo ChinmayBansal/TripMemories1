@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Review</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trip/styles.css' %}" type="text/css">
+</head>
+<body>
+
+    <h1>Add a Review</h1>
+
+    {% if trips_without_reviews %}
+        <ul>
+            {% for trip in trips_without_reviews %}
+                <li>{{ trip.destination }} - {{ trip.start_date }} to {{ trip.end_date }}
+                    <!-- Link to add review for this specific trip -->
+                    <a href="{% url 'add_review' trip.id %}">Add Review</a>
+                </li>
+               
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There is no trip available to review.</p>
+    {% endif %}
+
+    <br>
+    <!-- Back to Review Page Button -->
+    <a href="{% url 'review_page' %}">Back to Reviews</a>
+</body>
+</html>

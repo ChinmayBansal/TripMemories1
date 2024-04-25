@@ -1,0 +1,16 @@
+<!-- trips/templates/trip/delete_confirm.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Confirmation</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete this trip?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete it</button>
+        <a href="{% url 'home' %}">Cancel</a>
+    </form>
+</body>
+</html>

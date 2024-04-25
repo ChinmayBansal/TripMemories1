@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Trips</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trip/styles.css' %}" type="text/css">
+</head>
+<body>
+<form method="get">
+    {{ year_filter_form.as_p }}
+    <button type="submit">Filter by Year</button>
+</form>
+    <h1>Review Trips</h1>
+
+    {% if trips|length > 0 %}
+        <ul>
+            {% for trip in trips %}
+                {% if trip.reviews.exists %}
+                    <li>{{ trip.destination }} - {{ trip.start_date }} to {{ trip.end_date }}
+                        <ul>
+                            {% for review in trip.reviews.all %}
+                                <li>
+                                    <div>Review: {{ review.text }}</div>
+                                    <div>Rating: {{ review.rating }}</div>
+                                    <div>Date Posted: {{ review.date_posted|date:"Y-m-d" }}</div> 
+                                    <a href="{% url 'edit_review' review.id %}">Edit</a>
+                                    <a href="{% url 'delete_review_confirm' review.id %}" class="delete-review-button">Delete</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>There are no current reviews.</p>
+    {% endif %}
+
+    
+    <a href="{% url 'add_review_page' %}">Add a Review</a>
+
+    <br>
+   
+    <a href="{% url 'home' %}" class="add-trip-button">Back to Home</a>
+<script>
+        // Add confirmation for delete
+        document.querySelectorAll('.delete-trip-button').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                var confirmed = confirm('Are you sure you want to delete this trip?');
+                if (!confirmed) {
+                    e.preventDefault(); 
+                }
+            });
+        });
+    </script>
+</body>
+</html>

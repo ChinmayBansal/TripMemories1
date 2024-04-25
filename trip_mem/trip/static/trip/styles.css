@@ -1,0 +1,31 @@
+/* trips/static/trip/styles.css */
+.add-trip-button, .edit-trip-button, .delete-trip-button, .review-trips-button,.delete-review-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* This removes the underline from links */
+    display: inline-block; /* Aligns the button properly with text */
+}
+.add-trip-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.edit-trip-button {
+    background-color: #FFA500; /* Orange */
+    color: white;
+}
+
+.delete-trip-button {
+    background-color: #FF6347; /* Red */
+    color: white;
+}
+.review-trips-button {
+    background-color: #e7e4df;
+    color: black;
+}
+.delete-review-button {
+    background-color: #FF6347; /* Red */
+    color: white;
+}

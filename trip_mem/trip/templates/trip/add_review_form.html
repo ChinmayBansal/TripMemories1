@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Review</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trip/styles.css' %}">
+</head>
+<body>
+    <h1>Add a Review for Trip: {{ trip_id }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Review</button>
+         <a href="{% url 'review_page' %}">Cancel</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- trip/templates/trip/add_trip.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a New Trip</title>
+   
+    {% load static %}
+   
+    <link rel="stylesheet" href="{% static 'trip/styles.css' %}" type="text/css">
+</head>
+<body>
+    <h1>Add a New Trip</h1>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="add-trip-button">Add Trip</button>
+    </form>
+
+   <script>
+    // Client-side validation script
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the form and date input elements
+        var form = document.querySelector('form');
+        var startDateInput = document.querySelector('input[name="start_date"]');
+        var endDateInput = document.querySelector('input[name="end_date"]');
+
+        // Add an event listener for the form's submit event
+        form.addEventListener('submit', function(event) {
+            var startDate = new Date(startDateInput.value);
+            var endDate = new Date(endDateInput.value);
+
+            // Perform client-side validation for date range
+            if (startDate > endDate) {
+                event.preventDefault(); 
+                alert('End date cannot be before the start date. Please select a valid date range.');
+            } else if (!form.checkValidity()) {
+                event.preventDefault(); 
+                alert('Please fill all the required fields correctly.');
+            }
+        }, false);
+    });
+</script>
+
+</body>
+</html>

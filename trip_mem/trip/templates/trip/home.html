@@ -1,0 +1,45 @@
+<!-- trips/templates/trip/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trip Memories</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'trip/styles.css' %}" type="text/css">
+</head>
+<body>
+    <h1>Welcome to Trip Memories!</h1>
+    <div>
+        <h2>List of Trips:</h2>
+        <ul>
+            {% for trip in trips %}
+                <li>
+                    <strong>Destination:</strong> {{ trip.destination }} <br>
+                    <strong>Start Date:</strong> {{ trip.start_date }} <br>
+                    <strong>End Date:</strong> {{ trip.end_date }} <br>
+                    <strong>Description:</strong> {{ trip.description }} <br>
+                    <a href="{% url 'edit_trip' trip.id %}" class="edit-trip-button">Edit</a>
+                    <a href="{% url 'delete_trip' trip.id %}" class="delete-trip-button">Delete</a>
+                </li>
+            {% empty %}
+                <li>No trips have been added yet.</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'add_trip' %}" class="add-trip-button">Add New Trip</a>
+       
+        <a href="{% url 'review_page' %}" class="review-trips-button">Review Trips</a>
+    </div>
+
+    <script>
+        // Add confirmation for delete
+        document.querySelectorAll('.delete-trip-button').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                var confirmed = confirm('Are you sure you want to delete this trip?');
+                if (!confirmed) {
+                    e.preventDefault(); 
+                }
+            });
+        });
+    </script>
+</body>
+</html>
